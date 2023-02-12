@@ -1,8 +1,4 @@
-#!/usr/bin/env bash
-set -e
-
-envsubst < /usr/local/etc/php/php.ini.tmp \
-         > /usr/local/etc/php/conf.d/php.ini
+#!/usr/bin/env ash
 
 php-fpm -D
 nginx -g 'daemon off;'
