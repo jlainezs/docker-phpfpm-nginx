@@ -8,7 +8,6 @@ This template creates a docker image with php-fpm and nginx. As some services re
 
 ## Prepare your image
 
-* Copy ```env.example``` into ```.env``` and adjust the environment variables to your needs. Pls., note that some environment variables are injected in the configuration files.
 * Adjust configuration files under ```configuration``` folder.
 * Copy your application source code into the ```application``` folder.
 
