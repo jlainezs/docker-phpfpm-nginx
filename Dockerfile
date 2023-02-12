@@ -21,6 +21,9 @@ RUN docker-php-ext-install pdo_mysql \
 # Copy Php configuration
 COPY configuration/php/*.ini /usr/local/etc/php/conf.d
 
+# Copy php-fpm configuration
+COPY configuration/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
+
 # Copy nginx configuration
 COPY configuration/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY configuration/nginx/default /etc/nginx/sites-enabled/default
