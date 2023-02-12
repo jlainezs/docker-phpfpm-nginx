@@ -2,7 +2,7 @@ FROM php:8.1-fpm
 
 RUN apt update -y \
     && apt upgrade -y \
-    && apt install -y libpq-dev libzip-dev \
+    && apt install -y libpq-dev libzip-dev gettext-base \
     && apt install -y nginx
 
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
@@ -19,7 +19,7 @@ RUN docker-php-ext-install pdo_mysql \
     && apt-get remove libicu-dev icu-devtools -y
 
 # Copy Php configuration
-COPY configuration/php/*.ini /usr/local/etc/php/conf.d
+COPY configuration/php/php.ini /usr/local/etc/php/php.ini
 
 # Copy php-fpm configuration
 COPY configuration/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
@@ -33,10 +33,10 @@ COPY entrypoint.sh /etc/entrypoint.sh
 RUN chmod +x /etc/entrypoint.sh
 
 # Copy application files
-COPY --chown=www-data:www-data $WEBSITE /var/www/html
+COPY --chown=www-data:www-data ./application /var/www/html
 
 # Set working directory
-WORKDIR /var/www/html/$WEBSITE
+WORKDIR /var/www/html
 
 # Available ports
 EXPOSE 80

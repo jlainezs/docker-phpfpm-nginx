@@ -7,4 +7,4 @@ if [ -f .env ]; then
     set +a
 fi
 
-docker build -t $IMAGE_NAME .
+docker build -t tst/demo .
