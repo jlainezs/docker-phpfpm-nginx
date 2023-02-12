@@ -1,0 +1,8 @@
+# Ignore stuff for the docker context
+.cache
+.git
+.gitignore
+.env
+Dockerfile
+example.env
+*.md
