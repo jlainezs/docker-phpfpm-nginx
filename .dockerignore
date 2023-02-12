@@ -3,6 +3,7 @@
 .git
 .gitignore
 .env
+alternativeDockerFiles
 Dockerfile
 example.env
 *.md
