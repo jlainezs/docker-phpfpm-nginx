@@ -23,12 +23,15 @@ If the image is ready then you can deploy it to a container registry.
 
 ## Refrences
 
-
 * [php-fpm and nginx in one container](https://stackoverflow.com/questions/46332919/combining-php-fpm-with-nginx-in-one-dockerfile)
 * [docker build reference](https://docs.docker.com/engine/reference/commandline/build/)
 * [set docker image name](https://stackoverflow.com/questions/38986057/how-to-set-image-name-in-dockerfile)
 * [using environment variables](https://www.baeldung.com/linux/nginx-config-environment-variables)
 * [Load .env variables](https://gist.github.com/mihow/9c7f559807069a03e302605691f85572)
+
+## To do
+
+* Use environment variables to improve flexibility.
 
 ## Optimize image
 
