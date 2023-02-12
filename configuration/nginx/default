@@ -1,6 +1,6 @@
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+    listen $NGINX_PORT default_server;
+    listen [::]:$NGINX_PORT default_server;
 
     root /var/www/html;
     index index.php index.html;
@@ -15,8 +15,7 @@ server {
 
     location / {
         # try to serve file directly, fallback to index.php
-        # try_files $uri /index.php$is_args$args;
-        try_files $uri $uri/ /index.php?$args;
+        try_files $FASTCGI_URI $FASTCGI_URI/ /index.php?$FASTCGI_SCRIPT_ARGS;
     }
 
     add_header X-Content-Type-Options nosniff;
@@ -29,7 +28,7 @@ server {
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         fastcgi_index index.php;
         include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param SCRIPT_FILENAME $FASTCGI_SCRIPT_FILENAME;
         fastcgi_read_timeout 300;
     }
 

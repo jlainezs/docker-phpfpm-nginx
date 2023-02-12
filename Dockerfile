@@ -1,4 +1,5 @@
 FROM php:8.1-fpm-alpine
+ARG NGINX_PORT
 
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
 ENV PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
@@ -20,17 +21,18 @@ RUN apk add --update-cache \
     && docker-php-ext-install intl
 
 # Copy Php configuration
-COPY configuration/php/php.ini /usr/local/etc/php/php.ini
+COPY tmp/configuration/php/php.ini /usr/local/etc/php/php.ini
+COPY tmp/configuration/php/php-opcache-cfg.ini /usr/local/etc/php/conf.d/php-opcache-cfg.ini
 
 # Copy php-fpm configuration
-COPY configuration/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY tmp/configuration/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 # Copy nginx configuration
-COPY configuration/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY configuration/nginx/default /etc/nginx/sites-enabled/default
+COPY tmp/configuration/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY tmp/configuration/nginx/default /etc/nginx/sites-enabled/default
 
 # Prepare container entrypoint
-COPY entrypoint.sh /etc/entrypoint.sh
+COPY scripts/entrypoint.sh /etc/entrypoint.sh
 RUN chmod +x /etc/entrypoint.sh
 
 # Copy application files
